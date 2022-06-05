@@ -78,7 +78,7 @@ class Game:
                 continue
 
             choice = Options[CHOICES[user_input - 1]]
-            computers_choice = Options[CHOICES[randint(0, 4)]]
+            computers_choice = Options[CHOICES[randint(0, 8)]]
 
             print(
                 f"\nYour choice: {choice.name}\nComputer's choice: {computers_choice.name}\n"
