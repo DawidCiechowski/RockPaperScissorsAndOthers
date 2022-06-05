@@ -18,13 +18,38 @@ class Game:
     NEW_LINE = "\n"
     HINT = f"Choose one: {NEW_LINE}{NEW_LINE.join([f'{option.name} - {index + 1}' for index, option in enumerate(Options)])}\n\nPress 'Q' and 'Enter' to quite a game.\n"
     RULES = {
-        Options.ROCK: [Options.LIZARD, Options.WIZARD, Options.SCISSORS, Options.SPIDERMAN],
-        Options.SCISSORS: [Options.PAPER, Options.WIZARD, Options.LIZARD, Options.SPIDERMAN],
+        Options.ROCK: [
+            Options.LIZARD,
+            Options.WIZARD,
+            Options.SCISSORS,
+            Options.SPIDERMAN,
+        ],
+        Options.SCISSORS: [
+            Options.PAPER,
+            Options.WIZARD,
+            Options.LIZARD,
+            Options.SPIDERMAN,
+        ],
         Options.PAPER: [Options.ROCK, Options.SPOCK, Options.GLOCK, Options.BATMAN],
         Options.LIZARD: [Options.SPOCK, Options.BATMAN, Options.PAPER, Options.GLOCK],
-        Options.SPOCK: [Options.WIZARD, Options.SPIDERMAN, Options.ROCK, Options.SCISSORS],
-        Options.BATMAN: [Options.SPIDERMAN, Options.SCISSORS, Options.ROCK, Options.SPOCK],
-        Options.SPIDERMAN: [Options.GLOCK, Options.LIZARD, Options.PAPER, Options.WIZARD],
+        Options.SPOCK: [
+            Options.WIZARD,
+            Options.SPIDERMAN,
+            Options.ROCK,
+            Options.SCISSORS,
+        ],
+        Options.BATMAN: [
+            Options.SPIDERMAN,
+            Options.SCISSORS,
+            Options.ROCK,
+            Options.SPOCK,
+        ],
+        Options.SPIDERMAN: [
+            Options.GLOCK,
+            Options.LIZARD,
+            Options.PAPER,
+            Options.WIZARD,
+        ],
         Options.GLOCK: [Options.ROCK, Options.BATMAN, Options.SPOCK, Options.SCISSORS],
         Options.WIZARD: [Options.BATMAN, Options.PAPER, Options.LIZARD, Options.GLOCK],
     }
@@ -45,16 +70,21 @@ class Game:
             return
 
         self.pc += 1
+
     def play(self) -> None:
         CHOICES = [option.name for option in Options]
+
         def is_input_invalid(user_input: str) -> bool:
-            return (
-                not user_input.isdigit() 
-                and not user_input.lower() in["q","rules","r"]
-            )
+            return not user_input.isdigit() and not user_input.lower() in [
+                "q",
+                "rules",
+                "r",
+            ]
 
         while True:
-            user_input = input(Game.HINT) if self.first_round else input("Your choice:\n")
+            user_input = (
+                input(Game.HINT) if self.first_round else input("Your choice:\n")
+            )
             self.first_round = False
             if is_input_invalid(user_input):
                 print(Game.HINT)
@@ -62,14 +92,12 @@ class Game:
 
             if user_input.lower() == "q":
                 print(
-                    f"Thanks for playing.\nFinal score:\n\nYou: {self.human}\nComuter: {self.pc}\nTies: {self.ties}"
+                    f"Thanks for playing.\nFinal score:\n\nYou: {self.human}\nComputer: {self.pc}\nTies: {self.ties}"
                 )
                 return
-            
+
             if user_input.lower() in ["rules", "r"]:
-                print(
-                    self.__get_rules()
-                )
+                print(self.__get_rules())
                 continue
 
             user_input = int(user_input)
@@ -101,6 +129,7 @@ class Game:
 
     To Quit the game press 'Q' and 'ENTER'.
     """
+
 
 if __name__ == "__main__":
     game = Game()
